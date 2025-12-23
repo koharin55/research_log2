@@ -13,9 +13,16 @@ Trix.config.textAttributes.redText = {
 }
 
 Trix.config.textAttributes.blueText = {
-  style: { color: "#4472c4" }, // よりはっきりした青
+  style: { color: "#4472c4" }, 
   inheritable: true,
-  parser: el => el.style.color === "rgb(30, 75, 184)",
+  parser: el => el.style.color === "rgb(68, 114, 196)",
+}
+
+// 任意の文字サイズ
+Trix.config.textAttributes.fontSize = {
+  styleProperty: "fontSize",
+  inheritable: true,
+  parser: el => el.style.fontSize || null,
 }
 
 document.addEventListener("trix-initialize", event => {
@@ -59,4 +66,36 @@ document.addEventListener("trix-initialize", event => {
       className: "trix-button--icon-blue-custom",
     }),
   )
+
+  // 文字サイズセレクト
+  const sizeWrapper = document.createElement("span")
+  sizeWrapper.className = "trix-button-group trix-button-group--font-size"
+
+  const sizeSelect = document.createElement("select")
+  sizeSelect.className = "trix-font-size-select"
+  sizeSelect.setAttribute("title", "文字サイズ")
+  sizeSelect.innerHTML = `
+    <option value="">サイズ</option>
+    <option value="12px">12px</option>
+    <option value="14px">14px</option>
+    <option value="16px">16px</option>
+    <option value="18px">18px</option>
+    <option value="20px">20px</option>
+    <option value="24px">24px</option>
+  `
+
+  sizeSelect.addEventListener("change", () => {
+    const editor = event.target.editor
+    if (!editor) return
+    const value = sizeSelect.value
+    if (value) {
+      editor.activateAttribute("fontSize", value)
+    } else {
+      editor.deactivateAttribute("fontSize")
+    }
+    event.target.focus()
+  })
+
+  sizeWrapper.appendChild(sizeSelect)
+  textGroup.after(sizeWrapper)
 })
