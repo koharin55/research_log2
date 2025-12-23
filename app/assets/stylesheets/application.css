@@ -1236,6 +1236,52 @@ body.is-modal-open {
   color: var(--text-muted);
 }
 
+/* Trix カスタムボタン（下線・赤・青） */
+.log-form trix-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.log-form trix-toolbar .trix-button-row {
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.log-form trix-toolbar .trix-button-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.trix-button--icon-underline-custom,
+.trix-button--icon-red-custom,
+.trix-button--icon-blue-custom {
+  text-indent: 0 !important;
+  background-image: none !important;
+  min-width: 26px;
+  padding: 2px 4px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-main);
+}
+
+.trix-button--icon-underline-custom {
+  text-decoration: underline;
+}
+
+.trix-button--icon-red-custom {
+  color: #d32f2f !important;
+}
+
+.trix-button--icon-blue-custom {
+  color: #4472c4 !important;
+}
 
 
 /* ===========================
