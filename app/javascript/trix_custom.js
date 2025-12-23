@@ -97,5 +97,7 @@ document.addEventListener("trix-initialize", event => {
   })
 
   sizeWrapper.appendChild(sizeSelect)
+
+  // テキストツールグループの直後に配置
   textGroup.after(sizeWrapper)
 })
