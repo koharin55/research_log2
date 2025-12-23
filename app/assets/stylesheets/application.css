@@ -1236,6 +1236,138 @@ body.is-modal-open {
   color: var(--text-muted);
 }
 
+/* Trix カスタムボタン（下線・赤・青） */
+.log-form trix-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.log-form trix-toolbar .trix-button-row {
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.log-form trix-toolbar .trix-button-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.log-form trix-toolbar .trix-dialogs {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  z-index: 20;
+}
+
+.trix-button--icon-underline-custom,
+.trix-button--icon-red-custom,
+.trix-button--icon-blue-custom {
+  text-indent: 0 !important;
+  background-image: none !important;
+  min-width: 24px;
+  padding: 2px 4px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-main);
+}
+
+.trix-button--icon-underline-custom {
+  text-decoration: underline;
+}
+
+.trix-button--icon-red-custom {
+  color: #d32f2f !important;
+}
+
+.trix-button--icon-blue-custom {
+  color: #4472c4 !important;
+}
+
+:root[data-theme="dark"] .trix-button--icon-red-custom {
+  color: #ff5b5b !important;
+}
+
+:root[data-theme="dark"] .trix-button--icon-blue-custom {
+  color: #5aa7ff !important;
+}
+
+/* ツールバーの高さをセレクトと揃える */
+.log-form trix-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.log-form trix-toolbar .trix-button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  height: auto;
+}
+
+.log-form trix-toolbar .trix-button-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  height: auto;
+}
+
+.log-form trix-toolbar .trix-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 4px 6px;
+  font-size: 13px;
+  line-height: 1;
+  /* デフォルトアイコンはTrixの背景画像を使う */
+}
+
+.log-form trix-toolbar .trix-button.trix-button--icon:not(.trix-button--icon-underline-custom):not(.trix-button--icon-red-custom):not(.trix-button--icon-blue-custom) {
+  text-indent: -9999px; /* テキストを隠してアイコンだけ表示 */
+  background-size: 18px 18px !important; /* 指定サイズに合わせる */
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  padding: 4px 6px;
+  align-items: center;
+}
+
+.log-form trix-toolbar .trix-button.trix-button--icon:not(.trix-button--icon-underline-custom):not(.trix-button--icon-red-custom):not(.trix-button--icon-blue-custom)::before {
+  width: 18px !important;
+  height: 18px !important;
+  background-size: 18px 18px !important;
+  margin: auto;
+}
+
+.trix-button-group--font-size {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 4px;
+  height: auto;
+}
+
+.trix-font-size-select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text-main);
+  font-size: 12px;
+  min-width: 80px; /* 「サイズ」が欠けない幅 */
+  height: 34px;
+  box-sizing: border-box;
+  line-height: 1.2;
+}
 
 
 /* ===========================

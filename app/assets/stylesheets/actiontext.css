@@ -50,12 +50,17 @@
 
 trix-toolbar .trix-button {
   /* ライトモード用（必要なら明示） */
-  background-size: 14px 14px;
+  background-size: 11px 11px !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
 }
 
 /* ダークモード時にアイコン色を薄く＆反転 */
-html[data-theme="dark"] trix-toolbar .trix-button {
+html[data-theme="dark"] trix-toolbar .trix-button:not(.trix-button--icon-red-custom):not(.trix-button--icon-blue-custom) {
   filter: invert(80%) brightness(120%);
 }
 
-
+html[data-theme="dark"] trix-toolbar .trix-button--icon-red-custom,
+html[data-theme="dark"] trix-toolbar .trix-button--icon-blue-custom {
+  filter: none !important;
+}
