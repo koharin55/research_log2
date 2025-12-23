@@ -1240,6 +1240,7 @@ body.is-modal-open {
 .log-form trix-toolbar {
   display: flex;
   flex-wrap: wrap;
+  position: relative;
 }
 
 .log-form trix-toolbar .trix-button-row {
@@ -1251,6 +1252,13 @@ body.is-modal-open {
   display: inline-flex;
   flex-wrap: wrap;
   gap: 4px;
+}
+
+.log-form trix-toolbar .trix-dialogs {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  z-index: 20;
 }
 
 .trix-button--icon-underline-custom,
@@ -1281,6 +1289,14 @@ body.is-modal-open {
 
 .trix-button--icon-blue-custom {
   color: #4472c4 !important;
+}
+
+:root[data-theme="dark"] .trix-button--icon-red-custom {
+  color: #ff5b5b !important;
+}
+
+:root[data-theme="dark"] .trix-button--icon-blue-custom {
+  color: #5aa7ff !important;
 }
 
 /* ツールバーの高さをセレクトと揃える */

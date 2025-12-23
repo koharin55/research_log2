@@ -56,7 +56,11 @@ trix-toolbar .trix-button {
 }
 
 /* ダークモード時にアイコン色を薄く＆反転 */
-html[data-theme="dark"] trix-toolbar .trix-button {
+html[data-theme="dark"] trix-toolbar .trix-button:not(.trix-button--icon-red-custom):not(.trix-button--icon-blue-custom) {
   filter: invert(80%) brightness(120%);
 }
 
+html[data-theme="dark"] trix-toolbar .trix-button--icon-red-custom,
+html[data-theme="dark"] trix-toolbar .trix-button--icon-blue-custom {
+  filter: none !important;
+}

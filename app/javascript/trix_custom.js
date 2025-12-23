@@ -101,3 +101,40 @@ document.addEventListener("trix-initialize", event => {
   // テキストツールグループの直後に配置
   textGroup.after(sizeWrapper)
 })
+
+// リンク入力欄をリンクボタン付近に表示
+document.addEventListener("trix-show-dialog", event => {
+  if (event.detail?.dialogName !== "link") return
+  const editor = event.target
+  const toolbar = editor?.toolbarElement
+  if (!toolbar) return
+
+  const linkButton =
+    toolbar.querySelector("[data-trix-attribute='href']") ||
+    toolbar.querySelector("[data-trix-action='link']")
+  const dialogs = toolbar.querySelector(".trix-dialogs")
+  if (!linkButton || !dialogs) return
+
+  const toolbarRect = toolbar.getBoundingClientRect()
+  const buttonRect = linkButton.getBoundingClientRect()
+  const left = Math.max(0, buttonRect.left - toolbarRect.left)
+  const top = Math.max(0, buttonRect.bottom - toolbarRect.top + 6)
+
+  dialogs.style.left = `${left}px`
+  dialogs.style.top = `${top}px`
+  dialogs.style.right = "auto"
+  dialogs.style.bottom = "auto"
+})
+
+document.addEventListener("trix-hide-dialog", event => {
+  if (event.detail?.dialogName !== "link") return
+  const editor = event.target
+  const toolbar = editor?.toolbarElement
+  if (!toolbar) return
+  const dialogs = toolbar.querySelector(".trix-dialogs")
+  if (!dialogs) return
+  dialogs.style.left = ""
+  dialogs.style.top = ""
+  dialogs.style.right = ""
+  dialogs.style.bottom = ""
+})
