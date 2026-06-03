@@ -15,7 +15,7 @@ set :deploy_to, '/var/www/research_log2'
 set :linked_files, fetch(:linked_files, []).push('.env')
 
 # バージョンが変わっても共通で参照するディレクトリを指定
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads', 'storage')
 
 set :rbenv_type, :user
 set :rbenv_ruby, '3.2.0'
