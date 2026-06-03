@@ -37,7 +37,7 @@ class Log < ApplicationRecord
   has_rich_text :memo
 
   validates :title, presence: true, length: { maximum: 100 }
-  validates :memo,  length: { maximum: 200 }, allow_blank: true
+  validates :memo,  length: { maximum: 500 }, allow_blank: true
   validate :images_count_within_limit
 
   # --- 並び順スコープ ---
