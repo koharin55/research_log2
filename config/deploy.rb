@@ -29,6 +29,9 @@ set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
 
 # Unicornの設定ファイルの場所
 set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
+
+# RAILS_ENVをproductionに指定（デフォルトのdeploymentのままだとproduction.rbが読まれない）
+set :unicorn_rack_env, 'production'
 set :keep_releases, 5
 
 # デプロイ処理が終わった後、Unicornを再起動するための記述
