@@ -37,7 +37,7 @@ class Log < ApplicationRecord
   has_rich_text :memo
 
   validates :title, presence: true, length: { maximum: 100 }
-  validates :memo,  length: { maximum: 1000 }, allow_blank: true
+  validate :memo_length_within_limit
   validate :images_count_within_limit
 
   # --- 並び順スコープ ---
@@ -125,6 +125,13 @@ scope :keyword_search, ->(query, mode: :and) {
   }
 
   private
+
+  def memo_length_within_limit
+    return if memo.blank?
+    if memo.to_plain_text.length > 1000
+      errors.add(:memo, "は1000文字以内で入力してください")
+    end
+  end
 
   def images_count_within_limit
     if images.attachments.size > 5
