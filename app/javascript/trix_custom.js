@@ -96,6 +96,12 @@ document.addEventListener("trix-initialize", event => {
     event.target.focus()
   })
 
+  // カーソル移動・選択変更のたびに、現在位置のフォントサイズをセレクトに反映する
+  event.target.addEventListener("trix-selection-change", () => {
+    const attrs = event.target.editor?.getActiveAttributes() || {}
+    sizeSelect.value = attrs.fontSize || ""
+  })
+
   sizeWrapper.appendChild(sizeSelect)
 
   // テキストツールグループの直後に配置
