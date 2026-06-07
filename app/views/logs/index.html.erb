@@ -109,7 +109,9 @@
           <% @other_logs.each do |log| %>
             <%= render "log_card", log: log, selected_log: @selected_log %>
           <% end %>
-          <%= paginate @other_logs %>
+          <div class="pagination-wrapper">
+            <%= paginate @other_logs %>
+          </div>
         </div>
       </div>
     <% end %>

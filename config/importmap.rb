@@ -13,3 +13,6 @@ pin "trix"
 pin "@rails/actiontext", to: "actiontext.esm.js"
 pin "log_card_click", to: "log_card_click.js"
 pin "trix_custom", to: "trix_custom.js"
+pin "highlight.js", to: "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/es/highlight.min.js",
+    integrity: "sha384-elZp05EZ8AgjT52C+3CgO6PvSzU18iuXkxKUTMCy/gpbrZPv8R9heZdSBWH7+Lvx"
+pin "highlight_init", to: "highlight_init.js"
