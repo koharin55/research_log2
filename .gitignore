@@ -33,3 +33,8 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# 開発ツール
+/.claude/
+/.serena/
+/docs/
