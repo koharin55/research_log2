@@ -15,8 +15,15 @@ RSpec.describe 'Logs', type: :request do
     sign_in user
   end
 
+  after do
+    ENV.delete('BASIC_AUTH_USER')
+    ENV.delete('BASIC_AUTH_PASSWORD')
+  end
+
   def basic_auth_headers
-    credentials = Base64.strict_encode64('test_user:test_pass')
+    credentials = Base64.strict_encode64(
+      "#{ENV.fetch('BASIC_AUTH_USER', '')}:#{ENV.fetch('BASIC_AUTH_PASSWORD', '')}"
+    )
     { 'HTTP_AUTHORIZATION' => "Basic #{credentials}" }
   end
 
