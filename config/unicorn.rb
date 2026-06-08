@@ -1,6 +1,9 @@
 #サーバ上でのアプリケーションコードが設置されているディレクトリを変数に入れておく
 app_path = File.expand_path('../../../', __FILE__)
 
+# USR2 再実行時も常に current の Gemfile を参照させる
+ENV['BUNDLE_GEMFILE'] = "#{app_path}/current/Gemfile"
+
 #アプリケーションサーバの性能を決定する
 worker_processes 1
 
