@@ -97,9 +97,18 @@ document.addEventListener("trix-initialize", event => {
   })
 
   // カーソル移動・選択変更のたびに、現在位置のフォントサイズをセレクトに反映する
+  // getActiveAttributes() はスタイル系属性の値を返さない場合があるため DOM から直接取得する
   event.target.addEventListener("trix-selection-change", () => {
-    const attrs = event.target.editor?.getActiveAttributes() || {}
-    sizeSelect.value = attrs.fontSize || ""
+    const sel = window.getSelection()
+    if (!sel || !sel.rangeCount) {
+      sizeSelect.value = ""
+      return
+    }
+    const node = sel.getRangeAt(0).startContainer
+    const el = node.nodeType === Node.TEXT_NODE ? node.parentElement : node
+    const styledEl = el?.closest('[style*="font-size"]')
+    const fontSize = styledEl?.style.fontSize || ""
+    sizeSelect.value = [...sizeSelect.options].some(o => o.value === fontSize) ? fontSize : ""
   })
 
   sizeWrapper.appendChild(sizeSelect)
