@@ -1,0 +1,24 @@
+<% existing_tags ||= [] %>
+<% if existing_tags.any? %>
+  <div class="tag-suggestions">
+    <button type="button" class="tag-suggestions__toggle"
+            aria-expanded="false"
+            aria-controls="tag-suggestions-list"
+            data-action="click->tag-suggestion#toggle"
+            data-tag-suggestion-target="toggleButton">
+      使用済みタグを見る
+      <span class="tag-suggestions__arrow" data-tag-suggestion-target="arrow">▼</span>
+    </button>
+    <div class="tag-suggestions__list is-hidden"
+         id="tag-suggestions-list"
+         data-tag-suggestion-target="list">
+      <% existing_tags.each do |tag| %>
+        <button type="button" class="tag-badge"
+                data-action="click->tag-suggestion#addTag"
+                data-tag-suggestion-name-param="<%= tag.name %>">
+          <%= tag.name %>
+        </button>
+      <% end %>
+    </div>
+  </div>
+<% end %>

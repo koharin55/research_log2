@@ -9,12 +9,7 @@ class CategoriesController < ApplicationController
 
   def create
     @category = current_user.categories.new(category_params)
-    if @category.save
-      redirect_to categories_path, notice: "カテゴリを作成しました。"
-    else
-      @categories = current_user.categories.order(:position, :name)
-      render :index, status: :unprocessable_entity
-    end
+    @category.save ? respond_to_category_created : respond_to_category_failed
   end
 
   def edit; end
@@ -40,5 +35,22 @@ class CategoriesController < ApplicationController
 
   def category_params
     params.require(:category).permit(:name, :color, :icon, :position)
+  end
+
+  def respond_to_category_created
+    respond_to do |format|
+      format.json { render json: { id: @category.id, name: @category.name }, status: :created }
+      format.html { redirect_to categories_path, notice: "カテゴリを作成しました。" }
+    end
+  end
+
+  def respond_to_category_failed
+    respond_to do |format|
+      format.json { render json: { errors: @category.errors.full_messages }, status: :unprocessable_entity }
+      format.html do
+        @categories = current_user.categories.order(:position, :name)
+        render :index, status: :unprocessable_entity
+      end
+    end
   end
 end

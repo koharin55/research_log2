@@ -20,19 +20,59 @@
     <%= f.text_field :title, required: true %>
   </div>
 
-  <div class="field">
+  <div class="field"
+       data-controller="category-modal"
+       data-category-modal-categories-url-value="<%= categories_path %>">
     <%= f.label :category_id, "カテゴリ" %>
-    <%= f.collection_select :category_id,
-          current_user.categories.order(:name), :id, :name,
-          { include_blank: "カテゴリを選択してください" } %>
+    <div class="category-select-row">
+      <%= f.collection_select :category_id,
+            @categories, :id, :name,
+            { include_blank: "カテゴリを選択してください" },
+            { data: { category_modal_target: "select" } } %>
+      <button type="button" class="btn-add-category"
+              data-action="click->category-modal#open">
+        ＋ 新規
+      </button>
+    </div>
+
+    <div class="cat-modal is-hidden" data-category-modal-target="modal">
+      <div class="cat-modal__overlay" data-action="click->category-modal#close"></div>
+      <div class="cat-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="cat-modal-title"
+           data-action="keydown->category-modal#handleKeydown">
+        <div class="cat-modal__header">
+          <h3 class="cat-modal__title" id="cat-modal-title">新しいカテゴリを追加</h3>
+          <button type="button" class="cat-modal__close"
+                  data-action="click->category-modal#close">×</button>
+        </div>
+        <div class="cat-modal__body">
+          <p class="cat-modal__error is-hidden" data-category-modal-target="error"></p>
+          <div class="rs-form-group">
+            <label class="rs-form-label" for="modal_category_name">カテゴリ名</label>
+            <input type="text" id="modal_category_name"
+                   class="rs-input-text"
+                   placeholder="例）Ruby, Excel, AI活用"
+                   data-category-modal-target="nameInput">
+          </div>
+        </div>
+        <div class="cat-modal__footer">
+          <button type="button" class="rs-button-primary"
+                  data-action="click->category-modal#submit">追加</button>
+          <button type="button" class="rs-button-ghost"
+                  data-action="click->category-modal#close">キャンセル</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="field">
     <%= label_tag :tag_names, "タグ（カンマ区切り）" %>
-    <%= text_field_tag :tag_names,
-          @log.tags&.map(&:name)&.join(", "),
-          placeholder: "例) AIプロンプト, Ruby on Rails, Excel VBA" %>
-    <p class="hint">既存のタグは一覧のタグフィルタで確認できます。</p>
+    <div data-controller="tag-suggestion">
+      <%= text_field_tag :tag_names,
+            @log.tags&.map(&:name)&.join(", "),
+            placeholder: "例) AIプロンプト, Ruby on Rails, Excel VBA",
+            data: { tag_suggestion_target: "tagInput" } %>
+      <%= render "logs/tag_suggestions", existing_tags: @existing_tags %>
+    </div>
   </div>
 
   <div class="field">

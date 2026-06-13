@@ -16,4 +16,8 @@ class Tag < ApplicationRecord
   has_many :logs, through: :log_tags
 
   validates :name, presence: true, length: { maximum: 50 }, uniqueness: { case_sensitive: false }
+
+  scope :used_by_user, lambda { |user|
+    joins(:logs).where(logs: { user_id: user.id }).distinct.order(:name)
+  }
 end
