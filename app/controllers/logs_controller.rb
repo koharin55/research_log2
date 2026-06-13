@@ -2,6 +2,7 @@
 
 class LogsController < ApplicationController
   before_action :set_log, only: %i[edit update destroy toggle_pin increment_copy_count]
+  before_action :set_form_data, only: %i[new create edit update]
 
   def index
     @categories = current_user.categories.order(:name)
@@ -91,6 +92,11 @@ class LogsController < ApplicationController
 
   def set_log
     @log = current_user.logs.find(params[:id])
+  end
+
+  def set_form_data
+    @categories    = current_user.categories.order(:name)
+    @existing_tags = Tag.used_by_user(current_user)
   end
 
   def filter_params
