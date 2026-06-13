@@ -16,13 +16,13 @@ export default class extends Controller {
   }
 
   handleKeydown(event) {
-    if (event.key === "Enter") {
-      event.preventDefault()
-      this.submit()
-    } else if (event.key === "Escape") {
+    if (event.key === "Escape") {
       this.close()
     } else if (event.key === "Tab") {
       this.#trapFocus(event)
+    } else if (event.key === "Enter" && event.target === this.nameInputTarget) {
+      event.preventDefault()
+      this.submit()
     }
   }
 
