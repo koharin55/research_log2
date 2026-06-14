@@ -880,6 +880,11 @@ body.is-modal-open {
 /* ============================================================
    画像ライトボックス：前後ナビボタン・カウンター
    ============================================================ */
+.image-lightbox-nav[hidden],
+.image-lightbox-counter[hidden] {
+  display: none;
+}
+
 .image-lightbox-nav {
   flex-shrink: 0;
   width: 40px;
