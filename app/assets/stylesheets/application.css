@@ -19,7 +19,8 @@
   --chip-bg:   #E6E8F4;  /* タグの背景色 */
   --modal-close-bg: rgba(0, 0, 0, 0.55);  /* 画像拡大時の × 背景 */
   --modal-close-color: #fff;              /* 画像拡大時の × 文字色 */
-  
+  --code-bg:   #D8DEEC;  /* コードブロック背景（説明欄との区別を明確化） */
+  --code-text: #24292E;  /* コードブロック地の文字色 */
 }
 
 :root[data-theme="dark"] {  /* ダークモード */
@@ -34,6 +35,8 @@
   --chip-bg:   #303030;
   --modal-close-bg: rgba(255, 255, 255, 0.85);
   --modal-close-color: #111;
+  --code-bg:   #0D1117;  /* コードブロック背景（github-dark.min.css と同系） */
+  --code-text: #C9D1D9;  /* コードブロック地の文字色 */
 }
 
 /* =========================
@@ -722,9 +725,6 @@ textarea {
   font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
   font-size: 13px;
   white-space: pre-wrap;
-  /* ページ背景色(--bg)を使いカード(--card-bg)と明確に区別する */
-  background-color: var(--bg);
-  color: var(--text-main);
 }
 
 /* hljs 適用時は pre の padding を 0 にして code.hljs 側に委譲 */
@@ -738,8 +738,18 @@ textarea {
   white-space: pre-wrap;
   border-radius: 0;
   padding: 12px 14px;
-  /* hljs テーマ背景をページ背景色で上書きしカードと区別する */
-  background-color: var(--bg);
+}
+
+:root[data-theme="light"] .code-block pre,
+:root[data-theme="light"] .code-block pre code.hljs {
+  background: #D8DEEC !important;
+  color: #24292E;
+}
+
+:root[data-theme="dark"] .code-block pre,
+:root[data-theme="dark"] .code-block pre code.hljs {
+  background: #0D1117 !important;
+  color: #C9D1D9;
 }
 
 .code-block .btn-accent {
@@ -748,6 +758,29 @@ textarea {
   right: 8px;
   border-radius: 16px;
   z-index: 1;
+}
+
+/* 説明欄（trix-content）内の pre タグ */
+
+.section-body .trix-content pre {
+  margin: 6px 0;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+}
+
+:root[data-theme="light"] .section-body .trix-content pre {
+  background: var(--code-bg);
+  color: var(--code-text);
+}
+
+:root[data-theme="dark"] .section-body .trix-content pre {
+  background: var(--code-bg);
+  color: var(--code-text);
 }
 
 /* ひとことメモ */
