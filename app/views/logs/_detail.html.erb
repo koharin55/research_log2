@@ -1,7 +1,7 @@
 <!-- app/views/logs/_detail.html.erb -->
 <div class="log-detail"
      data-controller="image-lightbox"
-     data-action="keydown@window->image-lightbox#handleKeydown">
+     data-action="keydown@window->image-lightbox#navigateWithKeyboard">
   <header class="log-detail-header">
     <h1><%= log.title %></h1>
 
@@ -88,7 +88,12 @@
   </section>
 
   <!-- 画像ライトボックス -->
-  <div class="image-modal" data-image-lightbox-target="modal" hidden>
+  <div class="image-modal"
+       role="dialog"
+       aria-modal="true"
+       aria-label="画像ライトボックス"
+       data-image-lightbox-target="modal"
+       hidden>
     <div class="image-modal-backdrop"
          data-action="click->image-lightbox#close"></div>
     <div class="image-modal-content card">

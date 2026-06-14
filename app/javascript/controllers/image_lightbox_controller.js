@@ -18,6 +18,7 @@ export default class extends Controller {
   close() {
     this.modalTarget.setAttribute("hidden", "hidden")
     this.imageTarget.src = ""
+    this.imageTarget.alt = ""
     document.body.classList.remove("is-modal-open")
   }
 
@@ -31,18 +32,24 @@ export default class extends Controller {
     this.#show()
   }
 
-  handleKeydown(event) {
+  navigateWithKeyboard(event) {
     if (this.modalTarget.hasAttribute("hidden")) return
-    if (event.key === "Escape")      this.close()
-    if (event.key === "ArrowLeft")   this.prev()
-    if (event.key === "ArrowRight")  this.next()
+    const handlers = { Escape: "close", ArrowLeft: "prev", ArrowRight: "next" }
+    const method = handlers[event.key]
+    if (method) {
+      event.preventDefault()
+      this[method]()
+    }
   }
 
   #show() {
+    const total = this.#images.length
     this.imageTarget.src = this.#images[this.#currentIndex]
+    this.imageTarget.alt = `画像 ${this.#currentIndex + 1} / ${total}`
     this.modalTarget.removeAttribute("hidden")
     document.body.classList.add("is-modal-open")
     this.#updateNav()
+    this.modalTarget.querySelector(".image-modal-close")?.focus()
   }
 
   #updateNav() {
