@@ -1,5 +1,7 @@
 <!-- app/views/logs/_detail.html.erb -->
-<div class="log-detail">
+<div class="log-detail"
+     data-controller="image-lightbox"
+     data-action="keydown@window->image-lightbox#handleKeydown">
   <header class="log-detail-header">
     <h1><%= log.title %></h1>
 
@@ -55,10 +57,15 @@
         </h2>
         <div class="section-body section-body--images">
           <div class="image-strip">
-            <% log.images.each do |img| %>
+            <% log.images.each_with_index do |img, i| %>
               <%= image_tag img.variant(resize_to_limit: [200, 150]),
-                    class: "log-image-thumb js-log-image",
-                    data: { full_url: url_for(img) } %>
+                    class: "log-image-thumb",
+                    data: {
+                      image_lightbox_target: "thumb",
+                      full_url: url_for(img),
+                      action: "click->image-lightbox#open",
+                      image_lightbox_index_param: i
+                    } %>
             <% end %>
           </div>
           <p class="hint">
@@ -80,16 +87,31 @@
     <% end %>
   </section>
 
-  <!-- 共通のモーダルDOM：画像拡大表示 -->
-  <div class="image-modal" data-image-modal hidden>
-    <div class="image-modal-backdrop"></div>
+  <!-- 画像ライトボックス -->
+  <div class="image-modal" data-image-lightbox-target="modal" hidden>
+    <div class="image-modal-backdrop"
+         data-action="click->image-lightbox#close"></div>
     <div class="image-modal-content card">
-      <button type="button" class="image-modal-close" aria-label="閉じる">
-        ×
-      </button>
+      <button type="button" class="image-modal-close" aria-label="閉じる"
+              data-action="click->image-lightbox#close">×</button>
+
       <div class="image-modal-body">
-        <img src="" alt="" class="image-modal-image" />
+        <button type="button" class="image-lightbox-nav image-lightbox-nav--prev"
+                aria-label="前の画像"
+                data-image-lightbox-target="prevBtn"
+                data-action="click->image-lightbox#prev">&#8249;</button>
+
+        <img src="" alt="" class="image-modal-image"
+             data-image-lightbox-target="image" />
+
+        <button type="button" class="image-lightbox-nav image-lightbox-nav--next"
+                aria-label="次の画像"
+                data-image-lightbox-target="nextBtn"
+                data-action="click->image-lightbox#next">&#8250;</button>
       </div>
+
+      <div class="image-lightbox-counter"
+           data-image-lightbox-target="counter"></div>
     </div>
   </div>
 
