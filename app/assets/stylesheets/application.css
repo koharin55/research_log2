@@ -722,6 +722,9 @@ textarea {
   font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
   font-size: 13px;
   white-space: pre-wrap;
+  /* ページ背景色(--bg)を使いカード(--card-bg)と明確に区別する */
+  background-color: var(--bg);
+  color: var(--text-main);
 }
 
 /* hljs 適用時は pre の padding を 0 にして code.hljs 側に委譲 */
@@ -735,6 +738,8 @@ textarea {
   white-space: pre-wrap;
   border-radius: 0;
   padding: 12px 14px;
+  /* hljs テーマ背景をページ背景色で上書きしカードと区別する */
+  background-color: var(--bg);
 }
 
 .code-block .btn-accent {

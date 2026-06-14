@@ -52,4 +52,27 @@
   }
 
   document.addEventListener("turbo:load", init);
+
+  // 「すべてのログ」ボックスのスクロール位置を維持する
+  const SCROLL_KEY = "logsListScrollTop";
+
+  document.addEventListener("turbo:before-cache", () => {
+    const container = document.querySelector(".logs-list-container");
+    if (container) {
+      sessionStorage.setItem(SCROLL_KEY, container.scrollTop);
+    }
+  });
+
+  document.addEventListener("turbo:load", () => {
+    const container = document.querySelector(".logs-list-container");
+    if (!container) {
+      sessionStorage.removeItem(SCROLL_KEY);
+      return;
+    }
+    const saved = sessionStorage.getItem(SCROLL_KEY);
+    if (saved !== null) {
+      container.scrollTop = parseInt(saved, 10);
+      sessionStorage.removeItem(SCROLL_KEY);
+    }
+  });
 })();
