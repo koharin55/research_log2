@@ -11,7 +11,7 @@ class LogQuery
 
   def call
     @call ||= begin
-      scope = @user.logs.includes(:category, :tags)
+      scope = @user.logs.with_attached_images.includes(:category, :tags)
       scope = apply_keyword(scope)
       scope = apply_category(scope)
       scope = apply_tags(scope)

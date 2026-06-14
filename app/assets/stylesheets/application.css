@@ -877,6 +877,51 @@ body.is-modal-open {
   overflow: hidden;
 }
 
+/* ============================================================
+   画像ライトボックス：前後ナビボタン・カウンター
+   ============================================================ */
+.image-lightbox-nav[hidden],
+.image-lightbox-counter[hidden] {
+  display: none;
+}
+
+.image-lightbox-nav {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  z-index: 1;
+}
+
+.image-lightbox-nav:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+:root[data-theme="dark"] .image-lightbox-nav {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+:root[data-theme="dark"] .image-lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.image-lightbox-counter {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding-top: 6px;
+}
+
 /* =========================
    空状態（共通）
    ========================= */
