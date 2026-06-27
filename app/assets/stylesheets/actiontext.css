@@ -64,3 +64,12 @@ html[data-theme="dark"] trix-toolbar .trix-button--icon-red-custom,
 html[data-theme="dark"] trix-toolbar .trix-button--icon-blue-custom {
   filter: none !important;
 }
+
+/* リストの視覚的インデント（編集中・表示中の両方） */
+.trix-content ul,
+.trix-content ol,
+trix-editor ul,
+trix-editor ol {
+  padding-left: 1em;
+  margin-left: 0.5em;
+}
