@@ -96,7 +96,7 @@
       <div class="image-strip">
         <% @log.images.each do |img| %>
           <div class="image-item">
-            <%= image_tag img.variant(resize_to_limit: [160, 120]), class: "log-image-thumb" %>
+            <%= img.blob.content_type == "image/gif" ? image_tag(url_for(img), class: "log-image-thumb") : image_tag(img.variant(resize_to_limit: [160, 120]), class: "log-image-thumb") %>
             <label class="hint">
               <%= check_box_tag "log[remove_image_ids][]", img.id %>
               この画像を削除

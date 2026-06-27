@@ -58,14 +58,14 @@
         <div class="section-body section-body--images">
           <div class="image-strip">
             <% log.images.each_with_index do |img, i| %>
-              <%= image_tag img.variant(resize_to_limit: [200, 150]),
+              <%= image_tag(img.blob.content_type == "image/gif" ? url_for(img) : img.variant(resize_to_limit: [200, 150]),
                     class: "log-image-thumb",
                     data: {
                       image_lightbox_target: "thumb",
                       full_url: url_for(img),
                       action: "click->image-lightbox#open",
                       image_lightbox_index_param: i
-                    } %>
+                    }) %>
             <% end %>
           </div>
           <p class="hint">
